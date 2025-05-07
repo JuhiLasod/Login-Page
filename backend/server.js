@@ -17,8 +17,9 @@ app.use(cors({
     origin: "https://login-page-7.onrender.com", // match your frontend Render URL
     credentials: true
   }));
+const PORT = process.env.PORT || 8000;
 app.use(express.json());
 app.use("/api/auth",router);
-app.listen(8000,()=>{
+app.listen(PORT,()=>{
     console.log("server is up");
 });
