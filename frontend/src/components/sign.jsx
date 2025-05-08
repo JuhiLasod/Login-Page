@@ -1,18 +1,42 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
+    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
 
+    const handleClose = () => {
+        navigate("/");
+    };
+
     const handleNewAcc = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch("https://login-page-4-qmr9.onrender.com/api/auth/signup", {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailPattern.test(username)) {
+                setMessage("Please enter a valid email address.");
+                return;
+            }
+            const passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{6,}$/;
+            const cleanPassword = password.trim();
+            console.log(cleanPassword);
+            if (!passwordPattern.test(cleanPassword)) {
+                setMessage("Password must contain at least one uppercase letter, one number, and one special character.");
+                return;
+            }
+            else {
+                console.log("Regex passed!");
+            }
+
+            const res = await fetch("http://localhost:8000/api/auth/signup", {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password })
             });
+
             const text = await res.text();
             setMessage(text);
         } catch (error) {
@@ -20,83 +44,98 @@ function Signup() {
         }
     };
 
-    const containerStyle = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        backgroundImage: "url('https://images.unsplash.com/photo-1508780709619-79562169bc64?auto=format&fit=crop&w=1740&q=80')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        fontFamily: "'Segoe UI', sans-serif",
-    };
-
-    const cardStyle = {
-        background: "rgba(255, 255, 255, 0.92)",
-        padding: "2rem 3rem",
-        borderRadius: "16px",
-        boxShadow: "0 8px 20px rgba(0, 0, 0, 0.2)",
-        width: "320px",
-        display: "flex",
-        flexDirection: "column",
-        gap: "1rem",
-        textAlign: "center"
-    };
-
-    const inputStyle = {
-        padding: "0.75rem",
-        border: "1px solid #ccc",
-        borderRadius: "8px",
-        fontSize: "1rem"
-    };
-
-    const buttonStyle = {
-        padding: "0.75rem",
-        backgroundColor: "#0077ff",
-        color: "white",
-        border: "none",
-        borderRadius: "8px",
-        fontSize: "1rem",
-        cursor: "pointer",
-        transition: "background-color 0.3s ease"
-    };
-
-    const messageStyle = {
-        fontWeight: "bold",
-        color: "#555",
-        marginTop: "0.5rem"
-    };
-
     return (
-        <div style={containerStyle}>
-            <form style={cardStyle} onSubmit={handleNewAcc}>
-                <h2 style={{ marginBottom: "1rem", color: "#333" }}>Create Account</h2>
+        <div style={styles.container}>
+            <form style={styles.card} onSubmit={handleNewAcc}>
+                <h2 style={styles.title}>Create your account</h2>
+
                 <input
-                    type="text"
-                    placeholder="Username"
+                    type="email"
+                    placeholder="Email "
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    style={inputStyle}
+                    style={styles.input}
+                    required
                 />
+
                 <input
                     type="password"
                     placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    style={inputStyle}
+                    style={styles.input}
+                    required
                 />
-                <button
-                    type="submit"
-                    style={buttonStyle}
-                    onMouseOver={(e) => e.target.style.backgroundColor = "#005dc1"}
-                    onMouseOut={(e) => e.target.style.backgroundColor = "#0077ff"}
-                >
+
+                {message && <p style={styles.message}>{message}</p>}
+
+                <button type="submit" style={styles.primaryButton}>
                     Sign Up
                 </button>
-                <p style={messageStyle}>{message}</p>
+
+                <button type="button" onClick={handleClose} style={styles.secondaryButton}>
+                    Cancel
+                </button>
             </form>
         </div>
     );
 }
+
+const styles = {
+    container: {
+        height: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#f1f3f4',
+        fontFamily: 'Roboto, sans-serif',
+    },
+    card: {
+        backgroundColor: '#fff',
+        padding: '40px',
+        borderRadius: '12px',
+        boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+        width: '350px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '15px'
+    },
+    title: {
+        margin: 0,
+        marginBottom: '10px',
+        fontSize: '24px',
+        fontWeight: 500,
+        textAlign: 'center'
+    },
+    input: {
+        padding: '12px',
+        fontSize: '14px',
+        borderRadius: '4px',
+        border: '1px solid #ccc'
+    },
+    primaryButton: {
+        padding: '12px',
+        backgroundColor: '#1a73e8',
+        color: '#fff',
+        border: 'none',
+        borderRadius: '4px',
+        fontSize: '16px',
+        cursor: 'pointer'
+    },
+    secondaryButton: {
+        padding: '10px',
+        backgroundColor: '#f5f5f5',
+        color: '#444',
+        border: '1px solid #ccc',
+        borderRadius: '4px',
+        fontSize: '14px',
+        cursor: 'pointer'
+    },
+    message: {
+        fontSize: '13px',
+        color: 'red',
+        textAlign: 'center'
+    }
+};
 
 export default Signup;

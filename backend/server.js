@@ -12,11 +12,15 @@ mongoose.connect(
     process.env.MONGO_URI
 ).then(()=>console.log("db connected"))
 .catch(()=>console.log("error while connecting"));
-// app.use(cors());
-app.use(cors({
-    origin: "https://login-page-7.onrender.com", // match your frontend Render URL
-    credentials: true
-  }));
+app.use(cors());
+// app.use(cors({
+//         origin: "https://localhost:3000", // match your frontend Render URL
+//         credentials: true
+//       }));
+// app.use(cors({
+//     origin: "https://login-page-7.onrender.com", // match your frontend Render URL
+//     credentials: true
+//   }));
 const PORT = process.env.PORT || 8000;
 app.use(express.json());
 app.use("/api/auth",router);

@@ -1,9 +1,9 @@
 import Login from "../Models/Login.js";
 export const signupController=async(req,res)=>{
     const {username,password}=req.body;
-    console.log(username)
+    console.log(username);
     try{
-    const existing=await Login.findOne({username,password});
+    const existing=await Login.findOne({username});
     if(existing)
     {
         res.send("user already exists");
