@@ -74,7 +74,7 @@ function Signup() {
                 </button>
 
                 <button type="button" onClick={handleClose} style={styles.secondaryButton}>
-                    Cancel
+                    Back to Login
                 </button>
             </form>
         </div>

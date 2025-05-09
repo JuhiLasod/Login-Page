@@ -160,10 +160,10 @@ function VerifyOtp() {
                             style={styles.input}
                         />
                         <button onClick={handleReset} style={styles.button}>Reset Password</button>
-                        <button onClick={handleLogin} style={styles.outlineButton}>Back to Login</button>
+                        
                         {resetres && <p style={{ ...styles.message, color: getColor(resetres) }}>{resetres}</p>}
                     </>
-                )}
+                )}<button onClick={handleLogin} style={styles.outlineButton}>Back to Login</button>
             </div>
         </div>
     );

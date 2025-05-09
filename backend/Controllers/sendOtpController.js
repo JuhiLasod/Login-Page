@@ -29,7 +29,8 @@ export const sendOtpController=async(req,res)=>{
     const mailOptions={
         from:"juhilasod29@gmail.com",
         to:email,
-        text:`${otp}`
+        subject: "Reset credentials",
+        text:`Otp to reset credentials of your website is ${otp}`
     };
     console.log("mailoptions");
     console.log(mailOptions);
