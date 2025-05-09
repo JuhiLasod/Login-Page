@@ -89,7 +89,7 @@ function VerifyOtp() {
             setResetres("Passwords do not match");
         } else {
             // const res = await fetch("http://localhost:8000/api/auth/resetpass", {
-                const res = await fetch("https://login-page-9.onrender.com/resetpass", {
+                const res = await fetch("https://login-page-9.onrender.com/api/auth/resetpass", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, newpass })
@@ -104,7 +104,7 @@ function VerifyOtp() {
     };
 
     const getColor = (text) =>
-        (text.toLowerCase().includes("success") || text.toLowerCase().includes("verified") || text.toLowerCase().includes("succ"))
+        (text.toLowerCase().includes("success") || text.toLowerCase().includes("successfull") || text.toLowerCase().includes("verified") || text.toLowerCase().includes("succ"))
             ? '#1a73e8' : 'red';
 
     return (
