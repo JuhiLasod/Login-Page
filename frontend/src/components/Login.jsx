@@ -50,7 +50,11 @@ function Login() {
                     style={styles.input}
                     required
                 />
-
+                <div style={styles.forgotPassword}>
+    <button type="button" onClick={clickVerifyOtp} style={styles.link}>
+        Forgot password?
+    </button>
+</div>
                 {message && <p style={styles.message}>{message}</p>}
 
                 <button type="submit" style={styles.button}>Log In</button>
@@ -65,7 +69,7 @@ function Login() {
                         Sign up
                     </button>
                 </div>
-                <button onClick={clickVerifyOtp}>forgot password?</button>
+                {/* <button onClick={clickVerifyOtp}>forgot password?</button> */}
             </form>
         </div>
     );

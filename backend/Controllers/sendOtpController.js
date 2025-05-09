@@ -35,8 +35,17 @@ export const sendOtpController=async(req,res)=>{
     console.log(mailOptions);
     try{
         await transporter.sendMail(mailOptions);
-        const newEntry=new Otp({email,otp});
-        await newEntry.save();
+        const newEntry=await Otp.findOne({email});
+        if(newEntry)
+        {
+            newEntry.otp=otp;
+            await newEntry.save();
+        }
+        else
+        {
+            const Entry=new Otp({email,otp});
+            await Entry.save();
+        }
         res.send("otp succ sent");
     }catch(err){
         res.send("could not send otp");

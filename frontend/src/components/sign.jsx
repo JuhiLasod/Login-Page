@@ -20,7 +20,7 @@ function Signup() {
                 setMessage("Please enter a valid email address.");
                 return;
             }
-            const passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{6,}$/;
+            const passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&._])[A-Za-z\d@$!%*?&._]{6,}$/;
             const cleanPassword = password.trim();
             console.log(cleanPassword);
             if (!passwordPattern.test(cleanPassword)) {
