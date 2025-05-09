@@ -31,7 +31,8 @@ function Signup() {
                 console.log("Regex passed!");
             }
 
-            const res = await fetch("http://localhost:8000/api/auth/signup", {
+            // const res = await fetch("http://localhost:8000/api/auth/signup", {
+                const res = await fetch("https://login-page-9.onrender.com/api/auth/signup", {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password })

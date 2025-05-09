@@ -12,8 +12,9 @@ function Login() {
     }
     const handleCred = async (e) => {
         e.preventDefault();
-
-        const res = await fetch("http://localhost:8000/api/auth/login", {
+        
+        const res = await fetch("https://login-page-9.onrender.com/api/auth/login", {
+        // const res = await fetch("http://localhost:8000/api/auth/login", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password })

@@ -19,7 +19,8 @@ function VerifyOtp() {
     const handleEmail = (e) => setEmail(e.target.value);
 
     const handleSendOtp = async () => {
-        const res = await fetch("http://localhost:8000/api/auth/sendotp", {
+        // const res = await fetch("http://localhost:8000/api/auth/sendotp", {
+            const res = await fetch("https://login-page-9.onrender.com/api/auth/sendotp", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email })
@@ -59,7 +60,8 @@ function VerifyOtp() {
     };
 
     const handleVerify = async () => {
-        const res = await fetch("http://localhost:8000/api/auth/verifyotp", {
+        // const res = await fetch("http://localhost:8000/api/auth/verifyotp", {
+        const res = await fetch("https://login-page-9.onrender.com/api/auth/verifyotp", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, otp })
@@ -86,7 +88,8 @@ function VerifyOtp() {
         if (newpass !== confirmpass) {
             setResetres("Passwords do not match");
         } else {
-            const res = await fetch("http://localhost:8000/api/auth/resetpass", {
+            // const res = await fetch("http://localhost:8000/api/auth/resetpass", {
+                const res = await fetch("https://login-page-9.onrender.com/resetpass", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, newpass })
