@@ -46,7 +46,7 @@ export const sendOtpController=async(req,res)=>{
             const Entry=new Otp({email,otp});
             await Entry.save();
         }
-        res.send("otp succ sent");
+        res.send("otp succussefully sent");
     }catch(err){
         res.send("could not send otp");
     }

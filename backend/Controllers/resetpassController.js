@@ -13,10 +13,10 @@ export const resetpassController=async(req,res)=>{
     try{
     user.password=newpass;
     user.save();
-    res.send("succ reset pass");
+    res.send("Password successfully reset");
     }
     catch(err){
-        res.send("unsucc reset pass");
+        res.send("reset password unsuccessfull");
     }
     // res.send("okay");
 };
