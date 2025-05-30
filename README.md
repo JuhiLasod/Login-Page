@@ -1,0 +1,1 @@
+This is a fully functional web application featuring secure user authentication. It supports user registration, login, password reset via email with OTP verification, and persistent user data storage. The system ensures a seamless and secure experience for both new and returning users. All sensitive operations are backed with email notifications and encrypted data handling.
